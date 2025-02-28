@@ -27,17 +27,36 @@ class PageResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('title')
+                ->required()
+                ->live()
+                ->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Str::slug($state))),
+            Forms\Components\TextInput::make('slug')
+                ->required(),
+                Forms\Components\Toggle::make('published')
+                ->label('Publish Page'),
                 Tabs::make('Page Details')
                 ->columnSpanFull()
                     ->tabs([
+                        Tab::make('Hero')
+                        ->schema([
+                            TextInput::make('hero_title')
+                                ->label('Hero Title')
+                                ->maxLength(255),
+                            TextInput::make('hero_subtitle')
+                                ->label('Hero Subtitle')
+                                ->maxLength(500),
+                            TextInput::make('hero_button')
+                                ->label('Hero Button Text')
+                                ->maxLength(100),
+                            FileUpload::make('hero_image')
+                                ->label('Hero Image')
+                                ->image()
+                                ->directory('hero-images')
+                                ->preserveFilenames(),
+                        ]),
                         Tab::make('Content')
                             ->schema([
-                                Forms\Components\TextInput::make('title')
-                                    ->required()
-                                    ->live()
-                                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Str::slug($state))),
-                                Forms\Components\TextInput::make('slug')
-                                    ->required(),
                                 Builder::make('content')
                                     ->blocks([
                                         Builder\Block::make('paragraph')
@@ -47,8 +66,7 @@ class PageResource extends Resource
                                                     ->required(),
                                             ])
                                     ]),
-                                Forms\Components\Toggle::make('published')
-                                    ->label('Publish Page'),
+              
                             ]),
                         
                         Tab::make('Meta')
@@ -65,6 +83,8 @@ class PageResource extends Resource
                                     ->directory('meta-images')
                                     ->preserveFilenames(),
                             ]),
+                        
+                     
                     ]),
             ]);
     }

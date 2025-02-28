@@ -21,8 +21,13 @@ return new class extends Migration
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->string('meta_image')->nullable();
+            $table->string('hero_image')->nullable();
+            $table->string('hero_title')->nullable();
+            $table->string('hero_subtitle')->nullable();
+            $table->string('hero_button')->nullable();
             $table->timestamps();
         });
+        
     }
     
     /**
