@@ -8,6 +8,13 @@ use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
 
+use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
+
 class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
@@ -23,14 +30,21 @@ class PageResource extends Resource
                     ->live()
                     ->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Str::slug($state))),
                 Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->unique(Page::class, 'slug'),
-                Forms\Components\RichEditor::make('content')
                     ->required(),
+                Builder::make('content')
+                    ->blocks([
+                        Builder\Block::make('paragraph')
+                            ->schema([
+                                RichEditor::make('content')
+                                    ->label('Paragraph')
+                                    ->required(),
+                            ])
+                    ]),
                 Forms\Components\Toggle::make('published')
                     ->label('Publish Page'),
             ]);
     }
+    
 
     public static function table(Tables\Table $table): Tables\Table
     {

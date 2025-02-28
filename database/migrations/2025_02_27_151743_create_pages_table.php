@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('content');
+            $table->json('content')->nullable();
             $table->boolean('published')->default(false);
             $table->integer('sort')->default(0); 
             $table->timestamps();

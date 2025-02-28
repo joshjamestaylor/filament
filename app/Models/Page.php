@@ -9,5 +9,9 @@ class Page extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'content' => 'array', 
+    ];
+
     protected $fillable = ['title', 'slug', 'content', 'published'];
 }
