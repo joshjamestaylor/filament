@@ -17,10 +17,14 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->json('content')->nullable();
             $table->boolean('published')->default(false);
-            $table->integer('sort')->default(0); 
+            $table->integer('sort')->default(0);
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->string('meta_image')->nullable();
             $table->timestamps();
         });
     }
+    
     /**
      * Reverse the migrations.
      */

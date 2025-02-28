@@ -14,6 +14,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 
 class PageResource extends Resource
 {
@@ -25,27 +27,48 @@ class PageResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->live()
-                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Str::slug($state))),
-                Forms\Components\TextInput::make('slug')
-                    ->required(),
-                Builder::make('content')
-                    ->blocks([
-                        Builder\Block::make('paragraph')
+                Tabs::make('Page Details')
+                ->columnSpanFull()
+                    ->tabs([
+                        Tab::make('Content')
                             ->schema([
-                                RichEditor::make('content')
-                                    ->label('Paragraph')
+                                Forms\Components\TextInput::make('title')
+                                    ->required()
+                                    ->live()
+                                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Str::slug($state))),
+                                Forms\Components\TextInput::make('slug')
                                     ->required(),
-                            ])
+                                Builder::make('content')
+                                    ->blocks([
+                                        Builder\Block::make('paragraph')
+                                            ->schema([
+                                                RichEditor::make('content')
+                                                    ->label('Paragraph')
+                                                    ->required(),
+                                            ])
+                                    ]),
+                                Forms\Components\Toggle::make('published')
+                                    ->label('Publish Page'),
+                            ]),
+                        
+                        Tab::make('Meta')
+                            ->schema([
+                                TextInput::make('meta_title')
+                                    ->label('Meta Title')
+                                    ->maxLength(255),
+                                Textarea::make('meta_description')
+                                    ->label('Meta Description')
+                                    ->maxLength(500),
+                                FileUpload::make('meta_image')
+                                    ->label('Meta Image')
+                                    ->image()
+                                    ->directory('meta-images')
+                                    ->preserveFilenames(),
+                            ]),
                     ]),
-                Forms\Components\Toggle::make('published')
-                    ->label('Publish Page'),
             ]);
     }
     
-
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table
