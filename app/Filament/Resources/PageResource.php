@@ -42,7 +42,8 @@ class PageResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('published'),
-            ]);
+            ])
+            ->reorderable('sort');
     }
 
     public static function getPages(): array

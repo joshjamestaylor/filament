@@ -11,7 +11,7 @@ class Navigation extends Component
 
     public function mount()
     {
-        $this->pages = Page::where('published', true)->get();
+        $this->pages = Page::where('published', true)->orderBy('sort')->get();
     }
 
     public function render()

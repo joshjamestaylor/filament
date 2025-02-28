@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('content');
             $table->boolean('published')->default(false);
+            $table->integer('sort')->default(0); 
             $table->timestamps();
         });
     }
