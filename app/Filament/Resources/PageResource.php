@@ -11,6 +11,7 @@ use Filament\Tables;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
@@ -28,33 +29,44 @@ class PageResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
-                ->required()
-                ->live()
-                ->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Str::slug($state))),
-            Forms\Components\TextInput::make('slug')
-                ->required(),
+                    ->required()
+                    ->live()
+                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Str::slug($state))),
+                Forms\Components\TextInput::make('slug')
+                    ->required(),
                 Forms\Components\Toggle::make('published')
-                ->label('Publish Page'),
+                    ->label('Publish Page'),
                 Tabs::make('Page Details')
-                ->columnSpanFull()
+                    ->columnSpanFull()
                     ->tabs([
                         Tab::make('Hero')
-                        ->schema([
-                            TextInput::make('hero_title')
-                                ->label('Hero Title')
-                                ->maxLength(255),
-                            TextInput::make('hero_subtitle')
-                                ->label('Hero Subtitle')
-                                ->maxLength(500),
-                            TextInput::make('hero_button')
-                                ->label('Hero Button Text')
-                                ->maxLength(100),
-                            FileUpload::make('hero_image')
-                                ->label('Hero Image')
-                                ->image()
-                                ->directory('hero-images')
-                                ->preserveFilenames(),
-                        ]),
+                            ->schema([
+                                Select::make('hero_layout')
+                                    ->label('Hero Layout')
+                                    ->options([
+                                        'image-background' => 'Background Image',
+                                        'image-half' => 'Half-screen Image',
+                                        'image-boxed' => 'Boxed Image',
+                                    ])
+                                    ->required(),
+                                Toggle::make('hero_invert')
+                                    ->label('Invert Hero')
+                                    ->helperText('Swap text and image placement'),
+                                TextInput::make('hero_title')
+                                    ->label('Hero Title')
+                                    ->maxLength(255),
+                                TextInput::make('hero_subtitle')
+                                    ->label('Hero Subtitle')
+                                    ->maxLength(500),
+                                TextInput::make('hero_button')
+                                    ->label('Hero Button Text')
+                                    ->maxLength(100),
+                                FileUpload::make('hero_image')
+                                    ->label('Hero Image')
+                                    ->image()
+                                    ->directory('hero-images')
+                                    ->preserveFilenames(),
+                            ]),
                         Tab::make('Content')
                             ->schema([
                                 Builder::make('content')
@@ -64,11 +76,9 @@ class PageResource extends Resource
                                                 RichEditor::make('content')
                                                     ->label('Paragraph')
                                                     ->required(),
-                                            ])
+                                            ]),
                                     ]),
-              
                             ]),
-                        
                         Tab::make('Meta')
                             ->schema([
                                 TextInput::make('meta_title')
@@ -83,18 +93,17 @@ class PageResource extends Resource
                                     ->directory('meta-images')
                                     ->preserveFilenames(),
                             ]),
-                        
-                     
                     ]),
             ]);
     }
-    
+
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('slug')->sortable(),
+                Tables\Columns\TextColumn::make('hero_layout')->label('Hero Layout'),
                 Tables\Columns\IconColumn::make('published')->boolean(),
             ])
             ->filters([

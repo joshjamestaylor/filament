@@ -13,5 +13,18 @@ class Page extends Model
         'content' => 'array', 
     ];
 
-    protected $fillable = ['title', 'slug', 'content', 'meta_title', 'meta_description', 'meta_image', 'published'];
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'meta_title',
+        'meta_description',
+        'meta_image',
+        'hero_title',
+        'hero_subtitle',
+        'hero_image',
+        'hero_layout',
+        'hero_invert',
+        'published'
+    ];
 }

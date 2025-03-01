@@ -25,9 +25,11 @@ return new class extends Migration
             $table->string('hero_title')->nullable();
             $table->string('hero_subtitle')->nullable();
             $table->string('hero_button')->nullable();
+            $table->string('hero_layout')->default('image-boxed'); 
+            $table->boolean('hero_invert')->default(false); 
+
             $table->timestamps();
         });
-        
     }
     
     /**

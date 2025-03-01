@@ -11,7 +11,8 @@
 
     <livewire:navigation />
     
-    <h1 class="text-3xl font-bold mb-4">{{ $page->title }}</h1>
+    <livewire:hero :page="$page" />
+
     @foreach ($page->content ?? [] as $block)
         @if ($block['type'] === 'paragraph')
             <p>{{ $block['data']['content'] }}</p>
