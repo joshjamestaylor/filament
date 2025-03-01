@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-100 text-gray-900">
 
-    <h1>TEST</h1>    
+<livewire:navigation />
 
     {{ var_dump($entry) }}
 

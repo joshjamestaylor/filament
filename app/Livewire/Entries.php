@@ -8,6 +8,7 @@ use App\Models\Entry;
 class Entries extends Component
 {
     public $entries = [];
+    public $slug = '';
 
     public function mount($block)
     {
@@ -15,6 +16,7 @@ class Entries extends Component
 
         if ($entry) {
             $this->entries = $entry->content; // Assign the 'content' array
+            $this->slug = $entry->slug;
         }
         
     }
