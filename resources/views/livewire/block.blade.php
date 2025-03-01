@@ -2,7 +2,7 @@
     <div class="container mx-auto h-full">
         <div class="grid grid-cols-1 md:grid-cols-2 items-center h-full">
             <div class="[ hero__copy ] [ z-30 relative text-center md:text-left px-6 ]
-                @if ($heroInvert) md:order-2 @else md:order-1 @endif">
+                @if ($block['data']['block_invert']) md:order-2 @else md:order-1 @endif">
                 @if ($block['data']['block_title'])
                     <h1 class="text-4xl font-bold">{{ $block['data']['block_title'] }}</h1>
                 @endif
@@ -17,7 +17,7 @@
                     class="
                         max-w-full h-auto object-cover
                         @if ($block['data']['block_layout'] === 'image-background') absolute inset-0 w-full h-full object-cover opacity-50
-                        @elseif ($block['data']['block_layout'] === 'image-half') absolute top-0 w-1/2 h-full @if ($heroInvert) left-0 @else right-0 @endif object-cover
+                        @elseif ($block['data']['block_layout'] === 'image-half') absolute top-0 w-1/2 h-full @if ($block['data']['block_invert']) left-0 @else right-0 @endif object-cover
                         @elseif ($block['data']['block_layout'] === 'image-boxed') max-w-lg mx-auto 
                         @endif
                     ">

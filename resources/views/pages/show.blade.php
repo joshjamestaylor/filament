@@ -14,8 +14,8 @@
     <livewire:hero :page="$page" />
 
     @foreach ($page->content ?? [] as $block)
-        @if ($block['type'] === 'paragraph')
-            <p>{{ $block['data']['content'] }}</p>
+        @if ($block['type'] === 'block')
+            <livewire:block :block="$block" />
         @elseif ($block['type'] === 'heading')
             <{{ $block['data']['level'] }}>{{ $block['data']['content'] }}</{{ $block['data']['level'] }}>
         @elseif ($block['type'] === 'image')

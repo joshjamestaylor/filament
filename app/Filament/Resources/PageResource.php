@@ -67,18 +67,39 @@ class PageResource extends Resource
                                     ->directory('hero-images')
                                     ->preserveFilenames(),
                             ]),
-                        Tab::make('Content')
+                            Tab::make('Content')
                             ->schema([
                                 Builder::make('content')
                                     ->blocks([
-                                        Builder\Block::make('paragraph')
+                                        Builder\Block::make('block')
                                             ->schema([
-                                                RichEditor::make('content')
-                                                    ->label('Paragraph')
+                                                // Core Block Schema
+                                                Select::make('block_layout')
+                                                    ->label('Block Layout')
+                                                    ->options([
+                                                        'image-background' => 'Background Image',
+                                                        'image-half' => 'Half-screen Image',
+                                                        'image-boxed' => 'Boxed Image',
+                                                    ])
                                                     ->required(),
+                                                Toggle::make('block_invert')
+                                                    ->label('Block invert')
+                                                    ->helperText('Swap text and image placement'),
+                                                TextInput::make('block_title')
+                                                    ->label('Block Title')
+                                                    ->maxLength(255),
+                                                Textarea::make('block_description')
+                                                    ->label('Block Description')
+                                                    ->maxLength(500),
+                                                FileUpload::make('block_image')
+                                                    ->label('Block Image')
+                                                    ->image()
+                                                    ->directory('block-images')
+                                                    ->preserveFilenames(),
                                             ]),
                                     ]),
-                            ]),
+                                ]),
+                        
                         Tab::make('Meta')
                             ->schema([
                                 TextInput::make('meta_title')
