@@ -21,7 +21,42 @@ class PageSeeder extends Seeder
                 'hero_button' => 'Read More',
                 'hero_image' => null, // Update with actual image path if needed
                 'content' => json_encode([
-                    ["type" => "paragraph", "data" => ["content" => "<p>Welcome to our about page.</p>"]]
+                    [
+                        "type" => "block", 
+                        "data" => [
+                            "block_layout" => "image-boxed",
+                            "block_title" => "Block title 1",
+                            "block_description" => "Block description 1",
+                            "block_image" => "block-images/block-image.svg",
+                            "block_invert" => true
+                        ]
+                    ],
+                    [
+                        "type" => "block", 
+                        "data" => [
+                            "block_layout" => "image-half",
+                            "block_title" => "Block title 2",
+                            "block_description" => "Block description 2",
+                            "block_image" => "block-images/block-image.svg",
+                            "block_invert" => false
+                        ]
+                        ],
+                        [
+                            "type" => "block", 
+                            "data" => [
+                                "block_layout" => "image-half",
+                                "block_title" => "Block title 3",
+                                "block_description" => "Block description 3",
+                                "block_image" => "block-images/block-image.svg",
+                                "block_invert" => true
+                            ]
+                        ],
+                        [
+                            "type" => "entries",
+                            "data" => [
+                                "entry" => "1"
+                            ]
+                        ]
                 ]),
 
                 'meta_title' => 'About Us',
@@ -48,5 +83,73 @@ class PageSeeder extends Seeder
                 'updated_at' => now(),
             ],
         ]);
+
+        DB::table('entries')->insert([
+            [
+                'title' => 'Blogs',
+                'slug' => Str::slug('blogs'),
+                'published' => true,
+                'content' => json_encode([
+                    [
+                        "type" => "entry", 
+                        "data" => [
+                            "entry_title" => "Blog title 1",
+                            "entry_slug" => "blog-1",
+                            "entry_description" => "Blog description 1",
+                            "entry_image" => "entry-images/entry-image.svg",
+                        ]
+                    ],
+                    [
+                        "type" => "entry", 
+                        "data" => [
+                            "entry_title" => "Blog title 2",
+                            "entry_slug" => "blog-2",
+                            "entry_description" => "Blog description 2",
+                            "entry_image" => "entry-images/entry-image.svg",
+                        ]
+                    ],
+                    [
+                        "type" => "entry", 
+                        "data" => [
+                            "entry_title" => "Blog title 3",
+                            "entry_slug" => "blog-3",
+                            "entry_description" => "Blog description 3",
+                            "entry_image" => "entry-images/entry-image.svg",
+                        ]
+                    ],
+                    [
+                        "type" => "entry", 
+                        "data" => [
+                            "entry_title" => "Blog title 4",
+                            "entry_slug" => "blog-4",
+                            "entry_description" => "Blog description 4",
+                            "entry_image" => "entry-images/entry-image.svg",
+                        ]
+                    ],
+                    [
+                        "type" => "entry", 
+                        "data" => [
+                            "entry_title" => "Blog title 5",
+                            "entry_slug" => "blog-5",
+                            "entry_description" => "Blog description 5",
+                            "entry_image" => "entry-images/entry-image.svg",
+                        ]
+                    ]
+                ]),
+            ],
+            [
+                'title' => 'News',
+                'slug' => Str::slug('news'),
+                'published' => true,
+                'content' => null, // Ensure content is included, even if null
+            ],
+            [
+                'title' => 'Products',
+                'slug' => Str::slug('products'),
+                'published' => true,
+                'content' => null, // Ensure content is included, even if null
+            ]
+        ]);
+        
     }
 }

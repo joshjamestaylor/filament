@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
+use App\Models\Entry;
+
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -97,6 +99,14 @@ class PageResource extends Resource
                                                     ->directory('block-images')
                                                     ->preserveFilenames(),
                                             ]),
+                                            Builder\Block::make('entries')
+                                            ->schema([
+                                                Select::make('entry')
+                                                ->label('Entry')
+                                                ->options(fn () => Entry::pluck('title', 'id')->toArray())
+
+                                                ->required(),
+                                            ]),
                                     ]),
                                 ]),
                         
@@ -124,7 +134,6 @@ class PageResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('slug')->sortable(),
-                Tables\Columns\TextColumn::make('hero_layout')->label('Hero Layout'),
                 Tables\Columns\IconColumn::make('published')->boolean(),
             ])
             ->filters([

@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EntryResource\Pages;
-use App\Filament\Resources\EntryResource\RelationManagers;
 use App\Models\Entry;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -21,7 +18,6 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
-
 
 class EntryResource extends Resource
 {
@@ -44,11 +40,22 @@ class EntryResource extends Resource
             Builder::make('content')
                 ->columnSpanFull()
                 ->blocks([
-                    Builder\Block::make('paragraph')
+                    Builder\Block::make('entry')
                         ->schema([
-                            RichEditor::make('content')
-                                ->label('Paragraph')
-                                ->required(),
+                            TextInput::make('entry_title')
+                            ->label('Entry Title')
+                            ->maxLength(255)
+                            ->afterStateUpdated(fn ($state, callable $set) => $set('entry_slug', \Str::slug($state))),
+                        Forms\Components\TextInput::make('entry_slug')
+                            ->required(),
+                        Textarea::make('entry_description')
+                            ->label('Entry Description')
+                            ->maxLength(500),
+                        FileUpload::make('entry_image')
+                            ->label('Entry Image')
+                            ->image()
+                            ->directory('entry-images')
+                            ->preserveFilenames(),
                         ]),
                 ]),
         ]);
@@ -58,7 +65,9 @@ class EntryResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('title')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('slug')->sortable(),
+                Tables\Columns\IconColumn::make('published')->boolean(),
             ])
             ->filters([
                 //

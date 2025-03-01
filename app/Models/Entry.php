@@ -9,6 +9,10 @@ class Entry extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'content' => 'array',
+    ];    
+
 
     protected $fillable = [
         'title',

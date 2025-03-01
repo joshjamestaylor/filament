@@ -10,7 +10,6 @@ class Block extends Component
 
     public function mount($block)
     {
-        // You can set the $block data here if it's not passed from the parent
         $this->block = $block;
     }
 
