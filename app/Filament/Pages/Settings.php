@@ -13,7 +13,7 @@ use Filament\Notifications\Notification;
 
 
  
-class EditSettings extends Page implements HasForms
+class Settings extends Page implements HasForms
 {
     use InteractsWithForms;
 
