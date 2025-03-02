@@ -24,6 +24,9 @@ class Page extends Model
         'hero_subtitle',
         'hero_image',
         'hero_layout',
+        'hero_bg_color',
+        'hero_accent_color',
+        'hero_text_color',
         'hero_invert',
         'published'
     ];

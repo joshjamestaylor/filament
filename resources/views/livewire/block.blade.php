@@ -1,13 +1,20 @@
-<div class="[ hero ] [ relative h-screen ]">
+<div class=" [ relative h-screen ]"
+style="background-color: {{ $block['data']['bg_color'] ?? '' }};">
     <div class="container mx-auto h-full">
         <div class="grid grid-cols-1 md:grid-cols-2 items-center h-full">
             <div class="[ hero__copy ] [ z-30 relative text-center md:text-left px-6 ]
                 @if ($block['data']['block_invert']) md:order-2 @else md:order-1 @endif">
                 @if ($block['data']['block_title'])
-                    <h1 class="text-4xl font-bold">{{ $block['data']['block_title'] }}</h1>
+                    <h1 class="text-4xl font-bold"
+                        style="color: {{ $block['data']['accent_color'] ?? '' }};"
+                    >{{ $block['data']['block_title'] }}</h1>
                 @endif
                 @if ($block['data']['block_description'])
-                    <p class="text-lg mt-4">{{ $block['data']['block_description'] }}</p>
+                    <p class="text-lg mt-4"
+                        style="color: @if (isset($block['data']['text_color']) && $block['data']['text_color'] == 'dark') {{ $dark_color }} 
+        @elseif (isset($block['data']['text_color']) && $block['data']['text_color'] == 'light') {{ $light_color }} 
+        @endif"
+                    >{{ $block['data']['block_description'] }}</p>
                 @endif
             </div>
             <div class="[ hero__image ] [ flex justify-center ]

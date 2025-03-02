@@ -101,6 +101,9 @@ class Settings extends Page implements HasForms
 
                                 Repeater::make('colors')
                                     ->schema([
+                                        TextInput::make('label') // Add a label field
+                                        ->label('Color Label') // Set the label for the label field
+                                        ->required(), // Optional: Make the label field required
                                         ColorPicker::make('color'),
                                     ])
                                     ->minItems(1) // Optional: you can set a minimum number of items

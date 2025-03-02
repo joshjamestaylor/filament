@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
 use App\Models\Entry;
+use App\Models\Setting;
+
 
 use Filament\Forms;
 use Filament\Resources\Resource;
@@ -28,6 +30,29 @@ class PageResource extends Resource
 
     public static function form(Forms\Form $form): Forms\Form
     {
+        $setting = Setting::first();
+
+        // Check if $setting exists and the 'colors' property is not null
+        if ($setting && $setting->colors) {
+            // Decode the JSON string if 'colors' is a JSON string
+            $colors = collect(json_decode($setting->colors, true))
+                ->pluck('color', 'label') // Pluck both the 'label' and 'color'
+                ->filter()
+                ->mapWithKeys(function ($color, $label) {
+                    // Style the color options with a circle swatch and a label
+                    return [
+                        $color => $label // Use label as key and color as value
+                    ];
+                })
+                ->toArray();
+        } else {
+            // Handle the case where $setting or 'colors' is null
+            $colors = []; // You can set a default value here if needed
+        }
+        
+
+        
+    
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
@@ -67,6 +92,25 @@ class PageResource extends Resource
                                     ->image()
                                     ->directory('hero-images')
                                     ->preserveFilenames(),
+                 
+                            Select::make('hero_bg_color')
+                            ->label('Hero Background Color')
+                            ->allowHtml()
+                            ->options($colors),
+
+                            Select::make('hero_accent_color')
+                            ->label('Hero Accent Color')
+                            ->allowHtml()
+                            ->options($colors),
+                                
+                            Select::make('hero_text_color')
+                            ->label('Hero Text Color')
+                            ->options([
+                                'light' => 'Light',
+                                'dark' => 'Dark',
+                            ])
+                            ->default('dark'),
+
                             ]),
                             Tab::make('Content')
                             ->schema([
@@ -97,6 +141,24 @@ class PageResource extends Resource
                                                     ->image()
                                                     ->directory('block-images')
                                                     ->preserveFilenames(),
+
+                                                    Select::make('bg_color')
+                                                    ->label('Background Color')
+                                                    ->allowHtml()
+                                                    ->options($colors),
+                        
+                                                    Select::make('accent_color')
+                                                    ->label('Accent Color')
+                                                    ->allowHtml()
+                                                    ->options($colors),
+                                                        
+                                                    Select::make('text_color')
+                                                    ->label('Text Color')
+                                                    ->options([
+                                                        'light' => 'Light',
+                                                        'dark' => 'Dark',
+                                                    ])
+                                                    ->default('dark'),
                                             ]),
                                             Builder\Block::make('entries')
                                             ->schema([
