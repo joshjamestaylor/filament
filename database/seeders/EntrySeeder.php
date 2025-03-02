@@ -25,7 +25,42 @@ class EntrySeeder extends Seeder
                             "entry_image" => "entry-images/entry-image.svg",
                         ]
                     ],
-                    // Add other entry data as needed...
+                    [
+                        "type" => "entry", 
+                        "data" => [
+                            "entry_title" => "Blog title 2",
+                            "entry_slug" => "blog-2",
+                            "entry_description" => "Blog description 2",
+                            "entry_image" => "entry-images/entry-image.svg",
+                        ]
+                    ],
+                    [
+                        "type" => "entry", 
+                        "data" => [
+                            "entry_title" => "Blog title 3",
+                            "entry_slug" => "blog-3",
+                            "entry_description" => "Blog description 3",
+                            "entry_image" => "entry-images/entry-image.svg",
+                        ]
+                    ],
+                    [
+                        "type" => "entry", 
+                        "data" => [
+                            "entry_title" => "Blog title 4",
+                            "entry_slug" => "blog-4",
+                            "entry_description" => "Blog description 4",
+                            "entry_image" => "entry-images/entry-image.svg",
+                        ]
+                    ],
+                    [
+                        "type" => "entry", 
+                        "data" => [
+                            "entry_title" => "Blog title 5",
+                            "entry_slug" => "blog-5",
+                            "entry_description" => "Blog description 5",
+                            "entry_image" => "entry-images/entry-image.svg",
+                        ]
+                    ]
                 ]),
             ],
             [

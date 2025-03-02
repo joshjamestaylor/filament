@@ -16,7 +16,11 @@ class Setting extends Model
      */
     protected $fillable = [
         'user_id',
-        'name',
+        'site_name',
+        'site_logo',
+        'meta_title',
+        'meta_description',
+        'meta_image'
     ];
 
     /**

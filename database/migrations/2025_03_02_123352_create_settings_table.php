@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');  // Add user_id column
-            $table->string('name')->default('default_name'); // Or any value you want
+            $table->string('site_name')->default('default_name'); // Or any value you want
+            $table->string('site_logo')->nullable();
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->string('meta_image')->nullable();
             $table->timestamps();
 
         });

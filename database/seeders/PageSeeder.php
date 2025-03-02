@@ -19,24 +19,46 @@ class PageSeeder extends Seeder
                 'hero_subtitle' => 'Learn more about our mission and values.',
                 'hero_button' => 'Read More',
                 'hero_image' => null, // Update with actual image path if needed
-                'content' => json_encode([
-                    [
-                        "type" => "block", 
-                        "data" => [
-                            "block_layout" => "image-boxed",
-                            "block_title" => "Block title 1",
-                            "block_description" => "Block description 1",
-                            "block_image" => "block-images/block-image.svg",
-                            "block_invert" => true
-                        ]
-                    ],
-                    // Add other blocks...
-                    [
-                        "type" => "entries",
-                        "data" => [
-                            "entry" => "1"
-                        ]
-                    ]
+                    'content' => json_encode([
+                        [
+                            "type" => "block", 
+                            "data" => [
+                                "block_layout" => "image-boxed",
+                                "block_title" => "Block title 1",
+                                "block_description" => "Block description 1",
+                                "block_image" => "block-images/block-image.svg",
+                                "block_invert" => true
+                            ]
+                        ],
+                        [
+                            "type" => "block", 
+                            "data" => [
+                                "block_layout" => "image-half",
+                                "block_title" => "Block title 2",
+                                "block_description" => "Block description 2",
+                                "block_image" => "block-images/block-image.svg",
+                                "block_invert" => false
+                            ]
+                            ],
+                            [
+                                "type" => "block", 
+                                "data" => [
+                                    "block_layout" => "image-half",
+                                    "block_title" => "Block title 3",
+                                    "block_description" => "Block description 3",
+                                    "block_image" => "block-images/block-image.svg",
+                                    "block_invert" => true
+                                ]
+                            ],
+                            [
+                                "type" => "entries",
+                                "data" => [
+                                    "entry" => "1"
+                                ]
+                            ]
+        
+                            
+    
                 ]),
                 'meta_title' => 'About Us',
                 'meta_description' => 'Learn more about our company and what we do.',
