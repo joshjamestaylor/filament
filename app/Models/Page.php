@@ -27,4 +27,9 @@ class Page extends Model
         'hero_invert',
         'published'
     ];
+
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = $value ?? '';  // Convert null to empty string
+    }
 }

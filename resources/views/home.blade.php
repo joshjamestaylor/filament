@@ -10,10 +10,20 @@
 <body class="bg-gray-100 text-gray-900">
 
     <livewire:navigation />
-
-    <h1 class="text-3xl font-bold mb-4">Home</h1>
     
+    <livewire:hero :page="$page" />
 
+    @foreach ($page->content ?? [] as $block)
+        @if ($block['type'] === 'block')
+            <livewire:block :block="$block" />
+        @elseif ($block['type'] === 'entries')
+            <livewire:entries :block="$block" />
+        @elseif ($block['type'] === 'image')
+            <img src="{{ $block['data']['url'] }}" alt="{{ $block['data']['alt'] }}">
+        @endif
+    @endforeach
+
+    <livewire:footer />
 
 @livewireScripts
 </body>

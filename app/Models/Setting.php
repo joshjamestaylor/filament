@@ -30,4 +30,10 @@ class Setting extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function mount()
+    {
+        // Assuming 'site_name' is a column in the settings table
+        $this->siteName = Setting::first()->site_name;
+    }
 }

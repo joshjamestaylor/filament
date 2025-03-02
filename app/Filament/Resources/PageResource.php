@@ -34,8 +34,7 @@ class PageResource extends Resource
                     ->required()
                     ->live()
                     ->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Str::slug($state))),
-                Forms\Components\TextInput::make('slug')
-                    ->required(),
+                Forms\Components\TextInput::make('slug'),  // Ensures the slug is unique in the database
                 Forms\Components\Toggle::make('published')
                     ->label('Publish Page'),
                 Tabs::make('Page Details')

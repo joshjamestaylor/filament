@@ -4,7 +4,7 @@
   <div class="container mx-auto px-4 md:flex justify-between items-center gap-6">
     <!-- Logo -->
     <div class="flex items-center justify-between md:w-auto w-full">
-      <a href="{{ route('home') }}" class="py-5 px-2 text-white flex-1 font-bold">Test.com</a>
+      <a href="{{ route('home') }}" class="py-5 px-2 text-white flex-1 font-bold">{{ $site_name }}</a>
       <!-- mobile menu icon -->
       <div class="md:hidden flex items-center">
         <button type="button" class="mobile-menu-button">
@@ -18,9 +18,11 @@
     <div class="hidden md:flex md:flex-row flex-col items-center justify-start md:space-x-1 pb-3 md:pb-0 navigation-menu">
       <!-- Loop through pages -->
       @foreach ($pages as $page)
-        <a href="{{ route('page.show', $page->slug) }}" class="py-2 px-3 hover:bg-sky-800 flex items-center gap-2 rounded">
+      @if ($page->slug)
+      <a href="{{ route('page.show', $page->slug) }}" class="py-2 px-3 hover:bg-sky-800 flex items-center gap-2 rounded">
           {{ $page->title }}
         </a>
+        @endif
       @endforeach
     </div>
   </div>
