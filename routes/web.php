@@ -7,7 +7,7 @@ use App\Models\Entry;
 
 Route::get('/', function () {
     $page = Page::where('slug', '')->where('published', true)->firstOrFail();
-    return view('home', compact('page'));
+    return view('pages.show', compact('page'));
 })->name('home');
 
 Route::get('/{slug}', function ($slug) {

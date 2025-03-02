@@ -13,6 +13,10 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Tabs;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Checkbox;
+
+
 
 class Settings extends Page implements HasForms
 {
@@ -36,6 +40,10 @@ class Settings extends Page implements HasForms
                 'meta_title' => $setting->meta_title,
                 'meta_description' => $setting->meta_description,
                 'meta_image' => $setting->meta_image,
+                'light_color' => $setting->light_color,
+                'dark_color' => $setting->dark_color,
+                'colors' => json_decode($setting->colors, true),
+                'dark_mode' => $setting->dark_mode
             ]);
         }
 
@@ -77,6 +85,26 @@ class Settings extends Page implements HasForms
                                     ->directory('meta-images')
                                     ->preserveFilenames(),
 
+                            ]),
+
+                            Tabs\Tab::make('Colors')
+                            ->schema([
+                                Checkbox::make('dark_mode')
+                                ->label('Enable Dark Mode')
+                                ->default(false),
+
+                                ColorPicker::make('light_color')
+                                ->label('Light Color'),
+
+                                ColorPicker::make('dark_color')
+                                ->label('Dark Color'),
+
+                                Repeater::make('colors')
+                                    ->schema([
+                                        ColorPicker::make('color'),
+                                    ])
+                                    ->minItems(1) // Optional: you can set a minimum number of items
+                                    ->maxItems(10), // Optional: you can set a maximum number of items
                             ]),
                         
                         // Socials tab

@@ -1,10 +1,23 @@
 <!-- resources/views/livewire/navigation.blade.php -->
 
-<nav class="bg-black text-white fixed top-0 left-0 w-full z-40">
+<nav class=" fixed top-0 left-0 w-full z-40 
+    " 
+    style="
+    @if ($dark_mode)
+        background: linear-gradient(to bottom, {{ $dark_color }} 0%, transparent 100%);
+        color: {{ $light_color }};
+    @else
+        background: linear-gradient(to bottom, {{ $light_color }} 0%, transparent 100%);
+        color: {{ $dark_color }};
+    @endif
+
+    "
+
+>
   <div class="container mx-auto px-4 md:flex justify-between items-center gap-6">
     <!-- Logo -->
     <div class="flex items-center justify-between md:w-auto w-full">
-      <a href="{{ route('home') }}" class="py-5 px-2 text-white flex-1 font-bold">{{ $site_name }}</a>
+      <a href="{{ route('home') }}" class="py-5 px-2  flex-1 font-bold">{{ $site_name }}</a>
       <!-- mobile menu icon -->
       <div class="md:hidden flex items-center">
         <button type="button" class="mobile-menu-button">

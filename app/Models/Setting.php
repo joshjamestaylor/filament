@@ -20,7 +20,11 @@ class Setting extends Model
         'site_logo',
         'meta_title',
         'meta_description',
-        'meta_image'
+        'meta_image',
+        'colors',
+        'dark_mode',
+        'light_color',
+        'dark_color'
     ];
 
     /**

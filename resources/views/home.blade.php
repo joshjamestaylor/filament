@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
     @livewireStyles
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body class="">
 
     <livewire:navigation />
     

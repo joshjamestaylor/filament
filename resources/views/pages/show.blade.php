@@ -7,7 +7,17 @@
     @vite('resources/css/app.css')
     @livewireStyles
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body     
+    style="
+    @if ( $dark_mode ) 
+        background-color: {{ $dark_color }};
+        color: {{ $light_color }};
+    @else 
+        background-color: {{ $light_color }};
+        color: {{ $dark_color }};
+    @endif"
+    >
+
 
     <livewire:navigation />
     
