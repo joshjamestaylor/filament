@@ -12,7 +12,7 @@ class Footer extends Component
     public function mount()
     {
         // Get the 'site_name' value from the settings table
-        $this->site_name = Setting::first()->site_name;
+        $this->site_name = Setting::first()->site_name ?? 'Default Site Name';
     }
 
     public function render()

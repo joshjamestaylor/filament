@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');  // Add user_id column
             $table->string('site_name')->default('default_name'); // Or any value you want
             $table->string('site_logo')->nullable();
-            $table->boolean('dark_mode')->default(0);
+            $table->boolean('dark_mode')->nullable()->default(0);
 
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();

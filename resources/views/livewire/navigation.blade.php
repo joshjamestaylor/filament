@@ -17,7 +17,13 @@
   <div class="container mx-auto px-4 md:flex justify-between items-center gap-6">
     <!-- Logo -->
     <div class="flex items-center justify-between md:w-auto w-full">
-      <a href="{{ route('home') }}" class="py-5 px-2  flex-1 font-bold">{{ $site_name }}</a>
+      <a href="{{ route('home') }}" class="py-5 px-2  flex-1 font-bold">
+        @if ($site_logo)
+        <img src="{{ asset('storage/' . $site_logo) }}" alt="{{ $site_name }} Logo" >
+        @else
+        {{ $site_name }}
+        @endif
+      </a>
       <!-- mobile menu icon -->
       <div class="md:hidden flex items-center">
         <button type="button" class="mobile-menu-button">

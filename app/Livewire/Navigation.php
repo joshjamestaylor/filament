@@ -15,7 +15,7 @@ class Navigation extends Component
     public function mount()
     {
         $this->pages = Page::where('published', true)->orderBy('sort')->get();
-        $this->site_name = Setting::first()->site_name;
+        $this->site_name = Setting::first()->site_name ?? 'Default Site Name';
 
     }
 
