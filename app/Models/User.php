@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\Setting;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
+
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -45,4 +50,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // In your User model
+    public function setting()
+    {
+        return $this->hasOne(Setting::class); // Or whatever relationship you have
+    }
+
 }
