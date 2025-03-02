@@ -8,9 +8,12 @@
 </head>
 <body class="bg-gray-100 text-gray-900">
 
-<livewire:navigation />
 
-    {{ var_dump($entry) }}
+<div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold">{{ $entry['data']['entry_title'] }}</h1>
+        <p class="text-lg">{{ $entry['data']['entry_description'] }}</p>
+        <img src="{{ asset($entry['data']['entry_image']) }}" alt="{{ $entry['data']['entry_title'] }}" class="w-full h-auto">
+    </div>
 
 
 
