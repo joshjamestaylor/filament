@@ -25,6 +25,9 @@
         @endif
     @endforeach
 
+    <livewire:footer />
+
+
 @livewireScripts
 </body>
 </html>
