@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             EntrySeeder::class,
             PageSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }
