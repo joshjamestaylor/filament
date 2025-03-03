@@ -38,7 +38,7 @@
       <!-- Loop through pages -->
       @foreach ($pages as $page)
       @if ($page->slug)
-      <a href="{{ route('page.show', $page->slug) }}" class="py-2 px-3 hover:bg-sky-800 flex items-center gap-2 rounded">
+      <a href="{{ route('page.show', $page->slug) }}" class="py-2 px-3 hover:opacity-50 flex items-center gap-2">
           {{ $page->title }}
         </a>
         @endif
