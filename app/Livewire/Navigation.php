@@ -13,22 +13,13 @@ class Navigation extends Component
     public $site_name;
 
     public $isMobileMenuOpen = false;
-    public $openDropdown = null;
 
     public function toggleMobileMenu()
     {
         $this->isMobileMenuOpen = !$this->isMobileMenuOpen;
     }
 
-    public function toggleDropdown($dropdown)
-    {
-        $this->openDropdown = ($this->openDropdown === $dropdown) ? null : $dropdown;
-    }
 
-    public function closeDropdown()
-    {
-        $this->openDropdown = null;
-    }
 
     public function mount()
     {

@@ -20,11 +20,15 @@
       </a>
       <!-- mobile menu icon -->
       <div class="md:hidden flex items-center">
-        <button type="button" wire:click="toggleMobileMenu">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
-          </svg>
-        </button>
+      <button type="button" wire:click="toggleMobileMenu" class="relative w-6 h-6">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition-all duration-300 ease-in-out">
+        <path class="transition-all duration-300 ease-in-out origin-top {{ $isMobileMenuOpen ? 'rotate-45 translate-y-2' : '' }}" d="M1.5 5.5h21.5" />
+        <path class="transition-all duration-300 ease-in-out {{ $isMobileMenuOpen ? 'opacity-0' : 'opacity-100' }}" d="M1.5 12h21.5" />
+        <path class="transition-all duration-300 ease-in-out origin-bottom {{ $isMobileMenuOpen ? '-rotate-45 -translate-y-2' : '' }}" d="M1.5 18.5h21.5" />
+      </svg>
+
+</button>
+
       </div>
     </div>
 
@@ -36,10 +40,7 @@
         <a href="{{ route('page.show', $page->slug) }}" class="py-2 px-3 hover:opacity-50 flex items-center gap-2" wire:click="toggleDropdown('{{ $page->slug }}')">
           {{ $page->title }}
         </a>
-        <!-- Dropdown (if applicable) -->
-        <div class="{{ $openDropdown === $page->slug ? 'block' : 'hidden' }} absolute bg-white shadow-md mt-2 p-2 dropdown-menu">
-          <p>Dropdown Content</p>
-        </div>
+
       </div>
       @endif
       @endforeach

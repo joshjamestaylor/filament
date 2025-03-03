@@ -1,4 +1,4 @@
-<div class="[ hero ] [ relative h-screen ]"
+<div class="[ hero ] [ relative lg:h-screen ]"
 style="background-color: {{ $heroBgColor }};">
 
     <div class="container mx-auto h-full">
