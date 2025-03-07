@@ -1,4 +1,4 @@
-<a href="{{ $url }}" class="block mt-3 w-fit hover:opacity-50">
+<a href="{{ $url }}" class="mt-3 w-fit hover:opacity-50">
     <div class="p-3"
          style="
             background-color: {{ $bg_color ?: ($dark_mode ? $light_color : $dark_color) }};

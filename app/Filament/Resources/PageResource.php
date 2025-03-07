@@ -82,7 +82,8 @@ class PageResource extends Resource
         return Tab::make('Content')->schema([
             Builder::make('content')->blocks([
                 Builder\Block::make('block')->schema(self::getBlockSchema($colors)),
-                Builder\Block::make('entries')->schema([Select::make('entry')->label('Entry')->options(fn () => Entry::pluck('title', 'id')->toArray())->required()]),
+                Builder\Block::make('entries')->schema(self::getEntriesSchema($colors)),
+                Builder\Block::make('form')->schema(self::getFormSchema($colors)),
             ])->collapsible(),
         ]);
     }
@@ -148,6 +149,36 @@ class PageResource extends Resource
             ])
             ->collapsible()
             ->orderable(),
+    
+        ];
+    }
+
+    private static function getFormSchema($colors)
+    {
+        return [
+            Select::make('form_layout')
+                ->label('Block Layout')
+                ->options([
+                    'image-background' => 'Background Image',
+
+                ])
+                ->required(),
+    
+        ];
+    }
+
+    private static function getEntriesSchema($colors)
+    {
+        return [
+            Select::make('entry')->label('Entry')->options(fn () => Entry::pluck('title', 'id')->toArray())->required(),
+            Select::make('entries_layout')
+                ->label('Entries Layout')
+                ->options([
+                    'show-preview' => 'Show Preview',
+                    'show-all' => 'Show All',
+
+                ])
+                ->required(),
     
         ];
     }
