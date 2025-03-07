@@ -9,7 +9,7 @@ use App\Models\Setting;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Forms\Components\{Builder, FileUpload, Select, Toggle, TextInput, Textarea, Tabs};
+use Filament\Forms\Components\{Repeater, Builder, FileUpload, Select, Toggle, TextInput, Textarea, RichEditor, Tabs};
 use Filament\Forms\Components\Tabs\Tab;
 
 class PageResource extends Resource
@@ -83,7 +83,7 @@ class PageResource extends Resource
             Builder::make('content')->blocks([
                 Builder\Block::make('block')->schema(self::getBlockSchema($colors)),
                 Builder\Block::make('entries')->schema([Select::make('entry')->label('Entry')->options(fn () => Entry::pluck('title', 'id')->toArray())->required()]),
-            ]),
+            ])->collapsible(),
         ]);
     }
 
@@ -105,6 +105,50 @@ class PageResource extends Resource
             Select::make('bg_color')->label('Background Color')->allowHtml()->options($colors),
             Select::make('accent_color')->label('Accent Color')->allowHtml()->options($colors),
             Select::make('text_color')->label('Text Color')->options(['light' => 'Light', 'dark' => 'Dark'])->default('dark'),
+            // Repeater for a select, when selected create a new text area or file upload depending on what was selected
+            Repeater::make('block_content')
+            ->label('Block content')
+            ->schema([
+                Select::make('block_content_type')
+                    ->label('Block Content Type')
+                    ->options([
+                        'text' => 'Text',
+                        'image' => 'Image',
+                        'button' => 'Button',
+                    ])
+                    ->reactive(),
+    
+                RichEditor::make('block_content_text')
+                    ->label('Text Content')
+                    ->maxLength(500)
+                    ->visible(fn ($get) => $get('block_content_type') === 'text'),
+    
+                FileUpload::make('block_content_image')
+                    ->label('Image Content')
+                    ->image()
+                    ->directory('block-content-image')
+                    ->preserveFilenames()
+                    ->visible(fn ($get) => $get('block_content_type') === 'image'),
+                
+                TextInput::make('block_content_button_title')
+                    ->label('Button Title')
+                    ->maxLength(100)
+                    ->visible(fn ($get) => $get('block_content_type') === 'button'),
+        
+                TextInput::make('block_content_button_url')
+                    ->label('Button URL')
+                    ->url()
+                    ->maxLength(255)
+                    ->visible(fn ($get) => $get('block_content_type') === 'button'),
+                    
+                Select::make('block_content_button_bg_color')->label('Background Color')->allowHtml()->options($colors),
+                Select::make('block_content_button_text_color')->options(['light' => 'Light', 'dark' => 'Dark'])
+
+
+            ])
+            ->collapsible()
+            ->orderable(),
+    
         ];
     }
 

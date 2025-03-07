@@ -2,7 +2,7 @@
 style="background-color: {{ $block['data']['bg_color'] ?? '' }};">
     <div class="container mx-auto h-full">
         <div class="grid grid-cols-1 md:grid-cols-2 items-center h-full">
-            <div class="[ hero__copy ] [ z-30 relative  px-6 ]
+            <div class="[ z-30 relative  px-6 ]
                 @if ($block['data']['block_invert']) md:order-2 @else md:order-1 @endif"
                 style="padding-top: calc((54vh - 100vw )/ -5); padding-bottom: calc((56vh - 100vw )/ -5);"
                 >
@@ -18,6 +18,23 @@ style="background-color: {{ $block['data']['bg_color'] ?? '' }};">
                         @endif"
                     >{{ $block['data']['block_description'] }}</p>
                 @endif
+
+
+                @foreach($block['data']['block_content'] as $content)
+                    @if($content['block_content_type'] === 'text')
+                        <div>{!! $content['block_content_text'] !!}</div>
+                    @elseif($content['block_content_type'] === 'image')
+                        <img src="{{ asset('storage/' . $content['block_content_image']) }}" alt="Block Image">
+                    @elseif($content['block_content_type'] === 'button')
+                        <livewire:button 
+                        title="{{ $content['block_content_button_title'] }}" 
+                        url="{{ $content['block_content_button_url'] }}"
+                        bg_color="{{ $content['block_content_button_bg_color'] }}"
+                        text_color="{{ $content['block_content_button_text_color'] }}"
+                        />
+                    @endif
+                @endforeach
+                
             </div>
             <div class="[ hero__image ] [ flex justify-center ]
                 @if ($block['data']['block_invert']) md:order-1 @else md:order-2 @endif h-full @if ($block['data']['block_layout'] === 'image-boxed') relative @endif">

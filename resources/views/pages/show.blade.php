@@ -18,25 +18,21 @@
     @endif"
     >
 
-
     <livewire:navigation />
     
     <livewire:hero :page="$page" />
-
-   
 
     @foreach ($page->content ?? [] as $block)
         @if ($block['type'] === 'block')
             <livewire:block :block="$block" />
         @elseif ($block['type'] === 'entries')
             <livewire:entries :block="$block" />
-        @elseif ($block['type'] === 'image')
+        @elseif ($block['type'] === 'form')
             <img src="{{ $block['data']['url'] }}" alt="{{ $block['data']['alt'] }}">
         @endif
     @endforeach
 
     <livewire:footer />
-
 
 @livewireScripts
 </body>
