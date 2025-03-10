@@ -9,12 +9,14 @@ class Entries extends Component
 {
     public $entries = [];
     public $slug = '';
+    public $linked_page = '';
     public $entries_layout;
 
     public function mount($block, $entries_layout = 'show')
     {
         $entry = Entry::find($block['data']['entry']); // Fetch entry from DB
         $this->entries_layout = $block['data']['entries_layout'];
+        $this->linked_page = $block['data']['linked_page'];
 
         if ($entry) {
             $this->entries = $entry->content; // Assign the 'content' array
@@ -33,6 +35,8 @@ class Entries extends Component
             'entries_layout' => $this->entries_layout,
             'entries' => $this->entries,
             'slug' => $this->slug,
+            'linked_page' => $this->linked_page,
+
         ]);
     }
 }

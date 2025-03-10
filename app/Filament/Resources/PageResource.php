@@ -106,7 +106,6 @@ class PageResource extends Resource
             Select::make('bg_color')->label('Background Color')->allowHtml()->options($colors),
             Select::make('accent_color')->label('Accent Color')->allowHtml()->options($colors),
             Select::make('text_color')->label('Text Color')->options(['light' => 'Light', 'dark' => 'Dark'])->default('dark'),
-            // Repeater for a select, when selected create a new text area or file upload depending on what was selected
             Repeater::make('block_content')
             ->label('Block content')
             ->schema([
@@ -179,7 +178,11 @@ class PageResource extends Resource
 
                 ])
                 ->required(),
-    
+                
+            Select::make('linked_page')
+                ->label('Linked Page')
+                ->options(fn () => Page::pluck('title', 'slug')->toArray())
+                ->nullable(),
         ];
     }
 
