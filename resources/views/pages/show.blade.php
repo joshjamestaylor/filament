@@ -29,7 +29,7 @@
 
             <livewire:entries :block="$block" :entriesLayout="$block['data']['entries_layout']"/>
         @elseif ($block['type'] === 'form')
-            <img src="{{ $block['data']['url'] }}" alt="{{ $block['data']['alt'] }}">
+            <livewire:form :block="$block" />
         @endif
     @endforeach
 

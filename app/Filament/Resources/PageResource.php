@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
+use App\Models\Form;
 use App\Models\Entry;
 use App\Models\Setting;
 use Filament\Forms;
@@ -155,13 +156,10 @@ class PageResource extends Resource
     private static function getFormSchema($colors)
     {
         return [
-            Select::make('form_layout')
-                ->label('Block Layout')
-                ->options([
-                    'image-background' => 'Background Image',
-
-                ])
-                ->required(),
+            Select::make('form')
+                ->label('Form')
+                ->options(fn () => Form::pluck('title', 'id')->toArray())
+                ->nullable(),
     
         ];
     }
