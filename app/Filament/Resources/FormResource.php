@@ -3,22 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FormResource\Pages;
+use App\Filament\Resources\FormResource\Widgets\SubmissionTable;
 use App\Models\Form;
-use Filament\Forms;
 use Filament\Forms\Form as FilamentForm;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Forms\Components\Builder;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 
 class FormResource extends Resource
 {
@@ -31,8 +26,7 @@ class FormResource extends Resource
         return $form
             ->schema([
                 Tabs::make('Form Tabs')
-                ->columnSpanFull()
-
+                    ->columnSpanFull()
                     ->tabs([
                         Tab::make('Fields')
                             ->schema([
@@ -54,40 +48,22 @@ class FormResource extends Resource
                                             ->required(),
                                     ]),
                             ]),
-    
-                        Tab::make('Submissions')
-                            ->schema([
-
-                            ]),
                     ]),
-                    
             ]);
     }
-    
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')->sortable()->searchable(),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
-    public static function getRelations(): array
+    public static function getWidgets(): array
     {
         return [
-            //
+            FormResource\Widgets\SubmissionTable::class, // Ensure correct namespace
         ];
     }
 

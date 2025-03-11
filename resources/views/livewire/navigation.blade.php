@@ -21,11 +21,11 @@
       <!-- mobile menu icon -->
       <div class="md:hidden flex items-center">
       <button type="button" wire:click="toggleMobileMenu" class="relative w-6 h-6">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition-all duration-300 ease-in-out">
-        <path class="transition-all duration-300 ease-in-out origin-top {{ $isMobileMenuOpen ? 'rotate-45 translate-y-2' : '' }}" d="M1.5 5.5h21.5" />
-        <path class="transition-all duration-300 ease-in-out {{ $isMobileMenuOpen ? 'opacity-0' : 'opacity-100' }}" d="M1.5 12h21.5" />
-        <path class="transition-all duration-300 ease-in-out origin-bottom {{ $isMobileMenuOpen ? '-rotate-45 -translate-y-2' : '' }}" d="M1.5 18.5h21.5" />
-      </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition-all duration-300 ease-in-out">
+          <path class="transition-all duration-300 ease-in-out origin-top {{ $isMobileMenuOpen ? 'rotate-45 translate-y-2' : '' }}" d="M1.5 5.5h21.5" />
+          <path class="transition-all duration-300 ease-in-out {{ $isMobileMenuOpen ? 'opacity-0' : 'opacity-100' }}" d="M1.5 12h21.5" />
+          <path class="transition-all duration-300 ease-in-out origin-bottom {{ $isMobileMenuOpen ? '-rotate-45 -translate-y-2' : '' }}" d="M1.5 18.5h21.5" />
+        </svg>
 
 </button>
 
