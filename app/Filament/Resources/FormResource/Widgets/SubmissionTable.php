@@ -18,6 +18,13 @@ class SubmissionTable extends BaseWidget
                 Tables\Columns\TextColumn::make('email')->label('Email'),
                 Tables\Columns\TextColumn::make('first_name')->label('First name'),
                 Tables\Columns\TextColumn::make('last_name')->label('Last name'),
+                // Display answers as a dropdown or list of keys
+                Tables\Columns\TextColumn::make('answers')
+                    ->label('Answers')
+                    ->formatStateUsing(function ($state) {
+                        return 'View submission'; // Return the answers as they are
+                    }),
             ]);
     }
+    
 }
