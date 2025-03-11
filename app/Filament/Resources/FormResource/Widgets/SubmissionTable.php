@@ -4,12 +4,13 @@ namespace App\Filament\Resources\FormResource\Widgets;
 
 use App\Models\Submission;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
 class SubmissionTable extends BaseWidget
 {
-    public function table(Table $table): Table
+    protected int | string | array $columnSpan = 'full'; // Make the widget full width
+
+    public function table(Tables\Table $table): Tables\Table
     {
         return $table
             ->query(Submission::query()) // Fetch data from the submissions table

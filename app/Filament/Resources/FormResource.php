@@ -14,6 +14,7 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 
 class FormResource extends Resource
 {
@@ -24,32 +25,37 @@ class FormResource extends Resource
     public static function form(FilamentForm $form): FilamentForm
     {
         return $form
-            ->schema([
-                Tabs::make('Form Tabs')
-                    ->columnSpanFull()
-                    ->tabs([
-                        Tab::make('Fields')
-                            ->schema([
-                                TextInput::make('title')
-                                    ->label('Form Title')
-                                    ->required(),
-    
-                                Repeater::make('fields')
-                                    ->columnSpanFull()
-                                    ->schema([
-                                        TextInput::make('field_title')
-                                            ->label('Field Title')
-                                            ->maxLength(255),
-                                        Select::make('field_type')
-                                            ->label('Field type')
-                                            ->options([
-                                                'text' => 'Text',
-                                            ])
-                                            ->required(),
-                                    ]),
-                            ]),
-                    ]),
-            ]);
+
+        ->schema([
+            Toggle::make('edit_mode')
+                ->label('Edit Mode')
+                ->default(false)
+                ->live(), // Ensures real-time updates
+        
+            TextInput::make('title')
+                ->label('Form Title')
+                ->required()
+                ->visible(fn ($get) => $get('edit_mode')), // Hide when edit_mode is false
+        
+            Repeater::make('fields')
+                ->columnSpanFull()
+                ->schema([
+                    TextInput::make('field_title')
+                        ->label('Field Title')
+                        ->maxLength(255)
+                        ->visible(fn ($get) => $get('../../edit_mode')), // Hide based on edit_mode
+        
+                    Select::make('field_type')
+                        ->label('Field type')
+                        ->options([
+                            'text' => 'Text',
+                        ])
+                        ->required()
+                        ->visible(fn ($get) => $get('../../edit_mode')), // Hide based on edit_mode
+                ])
+                ->visible(fn ($get) => $get('edit_mode')), // Hide the entire repeater
+                        ]);
+        
     }
 
     public static function table(Table $table): Table
