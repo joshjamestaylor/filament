@@ -9,14 +9,15 @@ class Entries extends Component
 {
     public $entries = [];
     public $slug = '';
-    public $linked_page = '';
+    public $linked_page;
     public $entries_layout;
 
     public function mount($block, $entries_layout = 'show')
     {
         $entry = Entry::find($block['data']['entry']); // Fetch entry from DB
-        $this->entries_layout = $block['data']['entries_layout'];
-        $this->linked_page = $block['data']['linked_page'];
+        $this->entries_layout = $block['data']['entries_layout'] ?? 'show-all';
+        $this->linked_page = $block['data']['linked_page'] ?? '';
+        
 
         if ($entry) {
             $this->entries = $entry->content; // Assign the 'content' array

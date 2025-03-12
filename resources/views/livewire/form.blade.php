@@ -14,7 +14,7 @@
                 <input 
                     type="text" 
                     wire:model="answers.{{ $field['field_title'] }}" 
-                    class="w-full p-2 border border-gray-300 rounded"
+                    class="w-full p-2 border border-gray-300 "
                 >
             </div>
         @endforeach
@@ -26,15 +26,17 @@
                 <input 
                     type="text" 
                     wire:model="{{ $fieldName }}" 
-                    class="w-full p-2 border border-gray-300 rounded"
+                    class="w-full p-2 border border-gray-300 "
                 >
             </div>
         @endforeach
 
-        <button type="submit" class=" mb-3 bg-blue-500 text-white px-4 py-2 rounded">Save Form</button>
+        <button type="submit" class=" mb-3 bg-blue-500 text-white px-4 py-2 "
+        
+        >Save Form</button>
 
         @if (session()->has('success'))
-        <div class="bg-green-500 text-white p-3 mb-3 rounded">
+        <div class="bg-green-500 text-white p-3 mb-3 ">
             {{ session('success') }}
         </div>
     @endif

@@ -142,8 +142,8 @@ class PageResource extends Resource
                     ->maxLength(255)
                     ->visible(fn ($get) => $get('block_content_type') === 'button'),
                     
-                Select::make('block_content_button_bg_color')->label('Background Color')->allowHtml()->options($colors),
-                Select::make('block_content_button_text_color')->options(['light' => 'Light', 'dark' => 'Dark'])
+                Select::make('block_content_button_bg_color')->label('Butto background color')->allowHtml()->options($colors)->visible(fn ($get) => $get('block_content_type') === 'button'),
+                Select::make('block_content_button_text_color')->label('Button text color')->options(['light' => 'Light', 'dark' => 'Dark'])->visible(fn ($get) => $get('block_content_type') === 'button')
 
 
             ])

@@ -27,7 +27,15 @@ class PageSeeder extends Seeder
                                 "block_title" => "Block title 1",
                                 "block_description" => "Block description 1",
                                 "block_image" => "block-images/block-image.svg",
-                                "block_invert" => true
+                                "block_invert" => true,
+                                "block_content" => [
+                                    [
+                                        "block_content_type" => "text",
+                                        "block_content_text" => "Block content copy"
+                                    ]
+
+                                ]
+
                             ]
                         ],
                         [
@@ -53,11 +61,11 @@ class PageSeeder extends Seeder
                             [
                                 "type" => "entries",
                                 "data" => [
-                                    "entry" => "1"
+                                    "entry" => "1",
+                                    "entries_layout" => "show-preview",
+                                    "linked_page" => "news"
                                 ]
                             ]
-        
-                            
     
                 ]),
                 'meta_title' => 'About Us',
@@ -105,14 +113,33 @@ class PageSeeder extends Seeder
                                     "block_invert" => true
                                 ]
                             ],
+        
+                            
+    
+                ]),
+                'meta_title' => 'About Us',
+                'meta_description' => 'Learn more about our company and what we do.',
+                'meta_image' => null, // Update with actual image path if needed
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'News',
+                'slug' => Str::slug('News'),
+                'published' => true,
+                'hero_title' => 'News',
+                'hero_subtitle' => 'Follow us for more news.',
+                'hero_button' => 'Read More',
+                'hero_image' => null, // Update with actual image path if needed
+                    'content' => json_encode([
+    
                             [
                                 "type" => "entries",
                                 "data" => [
-                                    "entry" => "1"
+                                    "entry" => "1",
+                                    "entries_layout" => "show-all"
                                 ]
-                            ]
-        
-                            
+                            ]        
     
                 ]),
                 'meta_title' => 'About Us',

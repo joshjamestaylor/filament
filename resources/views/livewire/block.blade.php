@@ -19,21 +19,22 @@ style="background-color: {{ $block['data']['bg_color'] ?? '' }};">
                     >{{ $block['data']['block_description'] }}</p>
                 @endif
 
-
-                @foreach($block['data']['block_content'] as $content)
-                    @if($content['block_content_type'] === 'text')
-                        <div>{!! $content['block_content_text'] !!}</div>
-                    @elseif($content['block_content_type'] === 'image')
-                        <img src="{{ asset('storage/' . $content['block_content_image']) }}" alt="Block Image">
-                    @elseif($content['block_content_type'] === 'button')
-                        <livewire:button 
-                        title="{{ $content['block_content_button_title'] }}" 
-                        url="{{ $content['block_content_button_url'] }}"
-                        bg_color="{{ $content['block_content_button_bg_color'] }}"
-                        text_color="{{ $content['block_content_button_text_color'] }}"
-                        />
-                    @endif
-                @endforeach
+                @if (!empty($block['data']['block_content']) && is_array($block['data']['block_content']))
+                    @foreach($block['data']['block_content'] as $content)
+                        @if($content['block_content_type'] === 'text')
+                            <div>{!! $content['block_content_text'] !!}</div>
+                        @elseif($content['block_content_type'] === 'image')
+                            <img src="{{ asset('storage/' . $content['block_content_image']) }}" alt="Block Image">
+                        @elseif($content['block_content_type'] === 'button')
+                            <livewire:button 
+                            title="{{ $content['block_content_button_title'] }}" 
+                            url="{{ $content['block_content_button_url'] }}"
+                            bg_color="{{ $content['block_content_button_bg_color'] }}"
+                            text_color="{{ $content['block_content_button_text_color'] }}"
+                            />
+                        @endif
+                    @endforeach
+                @endif
                 
             </div>
             <div class="[ hero__image ] [ flex justify-center ]
