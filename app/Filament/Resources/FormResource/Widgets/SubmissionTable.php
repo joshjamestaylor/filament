@@ -25,9 +25,9 @@ class SubmissionTable extends BaseWidget
                 Tables\Columns\TextColumn::make('first_name')->label('First name'),
                 Tables\Columns\TextColumn::make('last_name')->label('Last name'),
                 Tables\Columns\TextColumn::make('answers')
-                    ->label('Answers')
-                    ->url(fn (Submission $record) => route('filament.resources.submissions.view', ['submission' => $record->id]))
-                    ->formatStateUsing(fn () => 'View submission'),
+                ->label('Answers')
+                ->url(fn (Submission $record) => route('filament.admin.resources.submissions.view', ['record' => $record->id]))
+                ->formatStateUsing(fn () => 'View Submission'),
             ]);
     }
 }

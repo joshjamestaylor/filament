@@ -31,7 +31,3 @@ Route::get('/{slug}/{entry_slug}', function ($slug, $entry_slug) {
     return view('entries.show', compact('entry'));
 });
 
-Route::prefix('admin')->group(function () {
-    Route::get('/submission/{submission}', [SubmissionController::class, 'show'])
-        ->name('filament.resources.submissions.view');
-});
