@@ -8,23 +8,23 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class SubmissionTable extends BaseWidget
 {
-    protected int | string | array $columnSpan = 'full'; // Make the widget full width
+    protected int | string | array $columnSpan = 'full'; 
+    public $formId; 
 
     public function table(Tables\Table $table): Tables\Table
     {
         return $table
-            ->query(Submission::query()) // Fetch data from the submissions table
+            ->query(Submission::query()->where('form_id', 1)) // Fetch submissions only for the current form
             ->columns([
                 Tables\Columns\TextColumn::make('email')->label('Email'),
                 Tables\Columns\TextColumn::make('first_name')->label('First name'),
                 Tables\Columns\TextColumn::make('last_name')->label('Last name'),
-                // Display answers as a dropdown or list of keys
                 Tables\Columns\TextColumn::make('answers')
                     ->label('Answers')
+                    ->url(fn (Submission $record) => route('filament.resources.submissions.view', ['submission' => $record->id]))
                     ->formatStateUsing(function ($state) {
-                        return 'View submission'; // Return the answers as they are
+                        return 'View submission';
                     }),
             ]);
     }
-    
 }
