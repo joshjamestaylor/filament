@@ -16,6 +16,9 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 
+use Illuminate\Support\Str;
+
+
 class FormResource extends Resource
 {
     protected static ?string $model = Form::class;
@@ -40,10 +43,14 @@ class FormResource extends Resource
             Repeater::make('fields')
                 ->columnSpanFull()
                 ->schema([
-                    TextInput::make('field_title')
-                        ->label('Field Title')
-                        ->maxLength(255)
-                        ->visible(fn ($get) => $get('../../edit_mode')), // Hide based on edit_mode
+                    TextInput::make('field_id')
+                    ->hidden(),
+                
+                TextInput::make('field_title')
+                    ->label('Field Title')
+                    ->maxLength(255)
+                    ->afterStateUpdated(fn ($set, $state) => $set('field_id', Str::slug($state))),
+                    
         
                     Select::make('field_type')
                         ->label('Field type')
@@ -51,7 +58,6 @@ class FormResource extends Resource
                             'text' => 'Text',
                         ])
                         ->required()
-                        ->visible(fn ($get) => $get('../../edit_mode')), // Hide based on edit_mode
                 ])
                 ->visible(fn ($get) => $get('edit_mode')), // Hide the entire repeater
                         ]);
