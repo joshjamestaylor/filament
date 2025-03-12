@@ -39,7 +39,7 @@ class SubmissionResource extends Resource
                     ->required(),
 
                     
-                Forms\Components\Grid::make(2)
+                Forms\Components\Grid::make(1)
                     ->schema(fn (Get $get): array => collect($get('answers') ?? [])
                         ->map(fn ($value, $key) => Forms\Components\TextInput::make("answers.$key")
                             ->label(ucfirst($key))
