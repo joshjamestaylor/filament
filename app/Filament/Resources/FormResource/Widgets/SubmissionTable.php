@@ -9,12 +9,17 @@ use Filament\Widgets\TableWidget as BaseWidget;
 class SubmissionTable extends BaseWidget
 {
     protected int | string | array $columnSpan = 'full'; 
-    public $formId; 
+    public ?int $formId = null; // Make formId nullable
+
+    public function mount(int $formId): void
+    {
+        $this->formId = $formId;
+    }
 
     public function table(Tables\Table $table): Tables\Table
     {
         return $table
-            ->query(Submission::query()->where('form_id', 1)) // Fetch submissions only for the current form
+            ->query(Submission::query()->where('form_id', $this->formId)) // Use dynamic formId
             ->columns([
                 Tables\Columns\TextColumn::make('email')->label('Email'),
                 Tables\Columns\TextColumn::make('first_name')->label('First name'),
@@ -22,9 +27,7 @@ class SubmissionTable extends BaseWidget
                 Tables\Columns\TextColumn::make('answers')
                     ->label('Answers')
                     ->url(fn (Submission $record) => route('filament.resources.submissions.view', ['submission' => $record->id]))
-                    ->formatStateUsing(function ($state) {
-                        return 'View submission';
-                    }),
+                    ->formatStateUsing(fn () => 'View submission'),
             ]);
     }
 }

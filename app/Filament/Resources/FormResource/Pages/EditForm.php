@@ -12,7 +12,7 @@ class EditForm extends EditRecord
     protected function getFooterWidgets(): array
     {
         return [
-            FormResource\Widgets\SubmissionTable::class,
+            FormResource\Widgets\SubmissionTable::make(['formId' => $this->record->id]), 
         ];
     }
 }
