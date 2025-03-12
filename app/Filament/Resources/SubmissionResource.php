@@ -10,6 +10,8 @@ use Filament\Forms\Form as FilamentForm;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Get;
+
 
 class SubmissionResource extends Resource
 {
@@ -36,9 +38,17 @@ class SubmissionResource extends Resource
                     ->label('Last Name')
                     ->required(),
 
-                Forms\Components\Textarea::make('answers')
-                    ->label('Answers')
-                    ->disabled(), // Keep answers read-only, or remove if editing is needed
+                    
+                Forms\Components\Grid::make(2)
+                    ->schema(fn (Get $get): array => collect($get('answers') ?? [])
+                        ->map(fn ($value, $key) => Forms\Components\TextInput::make("answers.$key")
+                            ->label(ucfirst($key))
+                            ->default($value)
+                            ->disabled()
+                        )->toArray()
+                    ),
+                
+                    
             ]);
     }
 
