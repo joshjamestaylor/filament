@@ -25,15 +25,15 @@ class PageSeeder extends Seeder
                             "data" => [
                                 "block_layout" => "image-boxed",
                                 "block_title" => "Block title 1",
-                                "block_description" => "Block description 1",
+                                "block_subtitle" => "Block subtitle 1",
                                 "block_image" => "block-images/block-image.svg",
                                 "block_invert" => true,
                                 "block_content" => [
                                     [
                                         "block_content_type" => "text",
                                         "block_content_text" => "Block content copy"
-                                    ]
-
+                                    ],
+                                    
                                 ]
 
                             ]
@@ -43,7 +43,7 @@ class PageSeeder extends Seeder
                             "data" => [
                                 "block_layout" => "image-half",
                                 "block_title" => "Block title 2",
-                                "block_description" => "Block description 2",
+                                "block_subtitle" => "Block subtitle 2",
                                 "block_image" => "block-images/block-image.svg",
                                 "block_invert" => false
                             ]
@@ -53,7 +53,7 @@ class PageSeeder extends Seeder
                                 "data" => [
                                     "block_layout" => "image-half",
                                     "block_title" => "Block title 3",
-                                    "block_description" => "Block description 3",
+                                    "block_subtitle" => "Block subtitle 3",
                                     "block_image" => "block-images/block-image.svg",
                                     "block_invert" => true
                                 ]
@@ -88,7 +88,7 @@ class PageSeeder extends Seeder
                             "data" => [
                                 "block_layout" => "image-boxed",
                                 "block_title" => "Block title 1",
-                                "block_description" => "Block description 1",
+                                "block_subtitle" => "Block subtitle 1",
                                 "block_image" => "block-images/block-image.svg",
                                 "block_invert" => true
                             ]
@@ -98,7 +98,7 @@ class PageSeeder extends Seeder
                             "data" => [
                                 "block_layout" => "image-half",
                                 "block_title" => "Block title 2",
-                                "block_description" => "Block description 2",
+                                "block_subtitle" => "Block subtitle 2",
                                 "block_image" => "block-images/block-image.svg",
                                 "block_invert" => false
                             ]
@@ -108,7 +108,7 @@ class PageSeeder extends Seeder
                                 "data" => [
                                     "block_layout" => "image-half",
                                     "block_title" => "Block title 3",
-                                    "block_description" => "Block description 3",
+                                    "block_subtitle" => "Block subtitle 3",
                                     "block_image" => "block-images/block-image.svg",
                                     "block_invert" => true
                                 ]

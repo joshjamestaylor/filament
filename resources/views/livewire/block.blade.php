@@ -11,12 +11,12 @@ style="background-color: {{ $block['data']['bg_color'] ?? '' }};">
                         style="color: {{ $block['data']['accent_color'] ?? '' }};"
                     >{{ $block['data']['block_title'] }}</h1>
                 @endif
-                @if ($block['data']['block_description'])
+                @if ($block['data']['block_subtitle'])
                     <p class="text-lg mt-4"
                         style="color: @if (isset($block['data']['text_color']) && $block['data']['text_color'] == 'dark') {{ $dark_color }} 
                         @elseif (isset($block['data']['text_color']) && $block['data']['text_color'] == 'light') {{ $light_color }} 
                         @endif"
-                    >{{ $block['data']['block_description'] }}</p>
+                    >{{ $block['data']['block_subtitle'] }}</p>
                 @endif
 
                 @if (!empty($block['data']['block_content']) && is_array($block['data']['block_content']))

@@ -102,7 +102,7 @@ class PageResource extends Resource
                 ->required(),
             Toggle::make('block_invert')->label('Block invert')->helperText('Swap text and image placement'),
             TextInput::make('block_title')->label('Block Title')->maxLength(255),
-            Textarea::make('block_description')->label('Block Description')->maxLength(500),
+            Textarea::make('block_subtitle')->label('Block Subtitle')->maxLength(500),
             FileUpload::make('block_image')->label('Block Image')->image()->directory('block-images')->preserveFilenames(),
             Select::make('bg_color')->label('Background Color')->allowHtml()->options($colors),
             Select::make('accent_color')->label('Accent Color')->allowHtml()->options($colors),
