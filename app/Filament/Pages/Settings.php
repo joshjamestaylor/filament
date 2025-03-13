@@ -111,6 +111,11 @@ class Settings extends Page implements HasForms
                                     ->minItems(1) // Optional: you can set a minimum number of items
                                     ->maxItems(10), // Optional: you can set a maximum number of items
                             ]),
+
+                            Tabs\Tab::make('Fonts')
+                            ->schema([
+          
+                            ]),
                         
                         // Socials tab
                         
