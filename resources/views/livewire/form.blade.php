@@ -32,16 +32,8 @@
             </div>
         @endforeach
 
-        <button type="submit" class=" mb-3 bg-blue-500 text-white px-4 py-2 "
-        
-        >Save Form</button>
-
-        <livewire:button type="submit"
-                            title="" 
-                            bg_color=""
-                            text_color=""
-                            />
-
+        <livewire:button title="Submit" />
+                            
         @if (session()->has('success'))
         <div class="bg-green-500 text-white p-3 mb-3 ">
             {{ session('success') }}

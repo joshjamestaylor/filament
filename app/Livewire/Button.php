@@ -11,7 +11,7 @@ class Button extends Component
     public $bg_color;
     public $text_color;
 
-    public function mount($title = 'Read more', $url = 'Click Me', $bg_color = '', $text_color = '')
+    public function mount($title = 'Read more', $url = '', $bg_color = '', $text_color = '')
     {
         $this->title = $title;
         $this->url = $url;
