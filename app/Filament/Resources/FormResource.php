@@ -25,6 +25,8 @@ class FormResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-folder-minus';
 
+    protected static ?int $navigationSort = 4;
+
     public static function form(FilamentForm $form): FilamentForm
     {
         return $form

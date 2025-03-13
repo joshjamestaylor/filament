@@ -25,6 +25,8 @@ class Settings extends Page implements HasForms
     public ?array $data = []; 
  
     protected static ?string $navigationIcon = 'heroicon-o-cog';
+
+    protected static ?int $navigationSort = 5;
  
     protected static string $view = 'filament.pages.edit-settings';
  
