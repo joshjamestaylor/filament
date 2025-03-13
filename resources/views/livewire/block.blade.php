@@ -7,16 +7,16 @@ style="background-color: {{ $block['data']['bg_color'] ?? '' }};">
                 style="padding-top: calc((54vh - 100vw )/ -5); padding-bottom: calc((56vh - 100vw )/ -5);"
                 >
                 @if ($block['data']['block_title'])
-                    <h1 class="text-4xl font-bold"
+                    <h2 class="text-4xl font-bold mb-3"
                         style="color: {{ $block['data']['accent_color'] ?? '' }};"
-                    >{{ $block['data']['block_title'] }}</h1>
+                    >{{ $block['data']['block_title'] }}</h2>
                 @endif
                 @if ($block['data']['block_subtitle'])
-                    <p class="text-lg mt-4"
+                    <h3 class="text-2xl mb-3"
                         style="color: @if (isset($block['data']['text_color']) && $block['data']['text_color'] == 'dark') {{ $dark_color }} 
                         @elseif (isset($block['data']['text_color']) && $block['data']['text_color'] == 'light') {{ $light_color }} 
                         @endif"
-                    >{{ $block['data']['block_subtitle'] }}</p>
+                    >{{ $block['data']['block_subtitle'] }}</h3>
                 @endif
 
                 @if (!empty($block['data']['block_content']) && is_array($block['data']['block_content']))
