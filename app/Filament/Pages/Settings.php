@@ -15,6 +15,7 @@ use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Select;
 
 
 
@@ -114,7 +115,27 @@ class Settings extends Page implements HasForms
 
                             Tabs\Tab::make('Fonts')
                             ->schema([
-          
+                                Select::make('selected_font')
+                                ->label('Choose Font')
+                                ->options([
+                                    'Times New Roman' => 'Times New Roman',
+                                    'Helvetica' => 'Helvetica',
+                                    'Courier New' => 'Courier New',
+                                    'Georgia' => 'Georgia',
+                                    'Verdana' => 'Verdana',
+                                    'Trebuchet MS' => 'Trebuchet MS',
+                                    //TODO: 'Custom' => 'Custom (Uploaded)',
+                                ])
+                                ->live()
+                                ->afterStateUpdated(fn ($state, callable $set) => $set('custom_font', $state === 'Custom' ? null : '')),
+                    
+                            FileUpload::make('custom_font')
+                                ->label('Upload Custom Font')
+                                ->disk('public')
+                                ->directory('fonts')
+                                ->acceptedFileTypes(['.woff', '.woff2'])
+                                ->visible(fn ($get) => $get('selected_font') === 'Custom'),
+                        
                             ]),
                         
                         // Socials tab
@@ -151,5 +172,4 @@ class Settings extends Page implements HasForms
         ->send(); 
     }
 
-    
 }

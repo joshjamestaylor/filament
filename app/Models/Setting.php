@@ -24,7 +24,9 @@ class Setting extends Model
         'colors',
         'dark_mode',
         'light_color',
-        'dark_color'
+        'dark_color',
+        'selected_font',
+        'custom_font'
     ];
 
     /**
@@ -40,4 +42,5 @@ class Setting extends Model
         // Assuming 'site_name' is a column in the settings table
         $this->siteName = Setting::first()->site_name;
     }
+    
 }

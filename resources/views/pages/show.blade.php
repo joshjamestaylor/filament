@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $page->title }}</title>
     @vite('resources/css/app.css')
-    @include('layouts.fonts')
     @livewireStyles
+
+    <livewire:settings />
+
 </head>
 <body     
+
     style="
     @if ( $dark_mode ) 
         background-color: {{ $dark_color }};
@@ -18,6 +21,7 @@
         color: {{ $dark_color }};
     @endif"
     >
+
 
     <livewire:navigation />
     

@@ -25,6 +25,9 @@ return new class extends Migration
             $table->string('light_color')->nullable(); 
             $table->string('dark_color')->nullable();  
 
+            $table->string('selected_font')->nullable(); 
+            $table->string('custom_font')->nullable();  
+
             $table->json('colors')->nullable(); 
             $table->timestamps();
 
