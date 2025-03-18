@@ -33,10 +33,8 @@ class Settings extends Page implements HasForms
  
     public function mount(): void 
     {
-        // Assuming your setting model is tied to the authenticated user
         $setting = auth()->user()->setting; 
         if ($setting) {
-            // Populate the form with the saved setting data
             $this->form->fill([
                 'site_name' => $setting->site_name,
                 'site_logo' => $setting->site_logo,
@@ -59,7 +57,6 @@ class Settings extends Page implements HasForms
             ->schema([
                 Tabs::make('Settings')
                     ->tabs([
-                        // General tab
                         Tabs\Tab::make('General')
                             ->schema([
                                 TextInput::make('site_name')
@@ -72,7 +69,6 @@ class Settings extends Page implements HasForms
 
                             ]),
                         
-                        // Meta tab
                         Tabs\Tab::make('Meta')
                             ->schema([
                                 TextInput::make('meta_title')
@@ -104,13 +100,13 @@ class Settings extends Page implements HasForms
 
                                 Repeater::make('colors')
                                     ->schema([
-                                        TextInput::make('label') // Add a label field
-                                        ->label('Color Label') // Set the label for the label field
-                                        ->required(), // Optional: Make the label field required
+                                        TextInput::make('label')
+                                        ->label('Color Label') 
+                                        ->required(), 
                                         ColorPicker::make('color'),
                                     ])
-                                    ->minItems(1) // Optional: you can set a minimum number of items
-                                    ->maxItems(10), // Optional: you can set a maximum number of items
+                                    ->minItems(1) 
+                                    ->maxItems(10), 
                             ]),
 
                             Tabs\Tab::make('Fonts')
@@ -124,6 +120,7 @@ class Settings extends Page implements HasForms
                                     'Georgia' => 'Georgia',
                                     'Verdana' => 'Verdana',
                                     'Trebuchet MS' => 'Trebuchet MS',
+                                    'Papyrus' => 'Papyrus',
                                     //TODO: 'Custom' => 'Custom (Uploaded)',
                                 ])
                                 ->live()
@@ -138,7 +135,6 @@ class Settings extends Page implements HasForms
                         
                             ]),
                         
-                        // Socials tab
                         
                     ])
             ])
@@ -159,7 +155,6 @@ class Settings extends Page implements HasForms
         try {
             $data = $this->form->getState();
     
-            // Ensure the user has a setting, create one if it doesn't exist
             $setting = auth()->user()->setting ?: auth()->user()->setting()->create();
     
             $setting->update($data);
